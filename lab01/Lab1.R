@@ -48,17 +48,19 @@ sequence / 10
 # now powers of 2, using operators similar to above. This can be done in two steps
 # and should end up looking like this  '[1]    1    2    4    8   16   32   64  128  256  512 1024'
 
+sequence4 = 2^(0:10)
+sequence4
+# It will print: '[1]    1    2    4    8   16   32   64  128  256  512 1024'
 
-
-# Okay, let's start with the visualisations. First lets create the example from the slides
+# Create a table and print it
+"""
+In this case, by default there will a scale on the y axes from 0 to 100
+Apples will have 53 points, banana: 12, cherries: 102 and Dates: 88
+"""
 simtab <- table(c(rep("Apples",53),rep("Bananas",12),rep("Cherries",102),rep("Dates",88)))
-
-# If you copy to following line (minus the hash/sharp sign) into the console, then it will produce a barplot.
-
-# barplot(simtab) to draw
-
-# This barplot uses the base graphics package of R. 
-
+# This barplot uses the base graphics package of R.
+barplot(simtable)
+ 
 
 # The following line turns our previous bar chart data into a probability data, by dividing each frequency
 # by the total. 
@@ -80,11 +82,12 @@ testsum <- sum(seq(0, 100, length=11))
 # Calculate the same values as simtabp from before, but using the sum() function instead.
 # Make sure you have no hardcoded numbers (i.e. no (53+12+102+88)), and store it in a new variable called simtabp2.
 
+simtabo2 = sum (sintab)
 
 # This next line will draw the probability distribution, using the base graphics package.
 # This is really important, as you will be using this function quite a bit in R!
 
-# barplot(simtabp)
+ barplot(simtabProbability)
 
 
 ###### QUESTION 2 #########
@@ -92,6 +95,14 @@ testsum <- sum(seq(0, 100, length=11))
 # categorical data, just like simtab did. Next, create a barplot of it, and a probablilty distribution bar plot. 
 
 
+# Random table example
+sportTab <- table(c(rep("Football", 60), rep("swimming", 54), rep("Golf", 30)))
+# Print the barplot
+barplot(sportTab)
+# Create a probability distribution 
+sportProbability <- sportTab / sum(sportTab)
+# Print the probability distribution bar plot
+barplot(sportProbability)
 
 ### These are some DISCRETE probability distributions.
 
@@ -104,9 +115,8 @@ testsum <- sum(seq(0, 100, length=11))
 xbin <- rbinom(10000,10,0.1)  
 tabbin <-table(xbin)
 tabbinp <- tabbin/10000
-
-# barplot(tabbin) from the command line to draw this
-# barplot(tabbinp) for the probability distribution
+barplot(tabbin) # from the command line to draw this
+barplot(tabbinp) # for the probability distribution
 
 ####### QUESTION 3 #########
 # Simulate, using the above rbinom pattern, the number of 2s that appear when a fair die is thrown 15 times.
@@ -121,9 +131,8 @@ tabbinp <- tabbin/10000
 xpois <- rpois(10000,4)
 tabpois <- table(xpois)
 tabpoisp <- tabpois/10000
-
-# barplot(tabpois) from the command line to draw this
-# barplot(tabpoisp) for the probability distribution
+barplot(tabpois) # from the command line to draw this
+barplot(tabpoisp) # for the probability distribution
 
 
 # UNIFORM DISTRIBUTION
@@ -231,7 +240,9 @@ contable <- as.table(contable)
 # barplot(contable,legend.text=TRUE) produces a stacked bar chart, with columns along the bottom
 # barplot(contable,beside=TRUE,legend.text=TRUE) produces a grouped bar chart
 
-contablet <- t(contable) # transpose it
+
+# t() given a matrix, return its transpose. 
+contablet <- t(contable) 
 
 # barplot(contablet,legend.text=TRUE) produces a stacked bar chart, with rows along the bottom
 # barplot(contablet,beside=TRUE,legend.text=TRUE) produces a grouped bar chart
@@ -242,15 +253,21 @@ contablet <- t(contable) # transpose it
 # the two ways given above.
 
 
+exampleBiTable <- matrix(c(12,34,11,6,16,72,78,89,21),ncol=3,byrow=TRUE)
+colnames(contable) <- c("Palermo", "Catania", "Torino")
+rownames(contable) <- c("Juventus", "Milan", "Frosinone")
 
+exampleBiTable <- as.table(exampleBiTable)
 
+exampleBiTable <- t(exampleBiTable)
 
 # discrete vs cts: grouped data
 # We will use boxplots to draw several continuous data sets, each of which represents a different category.
 # We all know East Lothian is the best of the Lothians, and here is a demonstration of that fact.
 
 lothians <- data.frame(East=rnorm(1000,185,12),Mid=rnorm(1000,160,13),West=rnorm(1000,140,10))
-# boxplot(lothians,ylab="Height (cm)") to draw
+# draw
+boxplot(lothians,ylab="Height (6)") 
 
 
 # Now we will draw them as distributions on the same set of axes.
@@ -262,13 +279,9 @@ probdenM <- dnorm(heightE,160,13)
 probdenW <- dnorm(heightE,140,10)
 
 # draw the one with lowest sd first
-# Put each of the following commands in separately.
-
-# plot(heightE,probdenW,type="l",col="blue",xlab="Height",ylab="Density")
-# lines(heightE,probdenM,col="red")
-# lines(heightE,probdenE,col="green")
-
-
+plot(heightE,probdenW,type="l",col="blue",xlab="Height",ylab="Density")
+lines(heightE,probdenM,col="red")
+lines(heightE,probdenE,col="green")
 
 
 # cts vs cts
@@ -289,9 +302,9 @@ ys1 <- xs + jitter1 # create the y-values
 # Here it is a squared curve. Lowess is more appropriate for curves than straight lines.
 ys2 <- xs^2/2 + jitter1
 
-# plot(xs,ys2)
-# abline(lm(ys2~xs),col="red")
-# lines(lowess(xs,ys2),col="blue")
+plot(xs,ys2)
+abline(lm(ys2~xs),col="red")
+lines(lowess(xs,ys2),col="blue")
 
 # Negative linear
 ys3 <- jitter1 - xs
@@ -313,12 +326,8 @@ jitter3 <- c(rnorm(20,0,0.5),6,rnorm(179,0,0.5))
 
 ys5 <- xs + jitter3
 
-# plot(xs,ys5)
-# abline(lm(ys5~xs),col = "red")
-
-
-
-
+plot(xs,ys5)
+abline(lm(ys5~xs),col = "red")
 
 
 #### For multidimensional data, we need some fancy packages. ggplot2 will be the one which is most useful.
