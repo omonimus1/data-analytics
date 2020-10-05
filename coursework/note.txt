@@ -1,0 +1,3 @@
+Install ggplot
+
+install.packages('ggplot2')
