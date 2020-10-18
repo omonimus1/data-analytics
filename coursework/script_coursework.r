@@ -41,17 +41,18 @@ ggplot(data, aes(x=Angle, y=Distance)) + geom_point()
 ggplot(data, aes(x=Distance, y=Score.1 + Score.2, color=Group, shape=Group)) + geom_point() + ylab("Total Score")
 
 ## GNENGA SOUMONA sECTION
+
+# PATTERN1 
 ggplot(data, aes(x=Offset, y=Score.1, colour=Wind.Direction)) + geom_smooth() + facet_wrap(~ Wind.Direction)
 
 ggplot(data, aes(x=Age, Score.2, fill=Wind.Direction)) + geom_histogram(stat="identity", position="dodge") + facet_wrap(~ Wind.Direction)
 
 # PATTERN / OUTLIER
-ggplot(data, aes(y=Group, x=Offset)) +geom_boxplot(aes(fill=Group))
+ggplot(data, aes(x=Group, y=Offset)) +geom_boxplot(aes(fill=Group))
 
 ggplot(data, aes(y=Wind.Direction, x=offset)) + geom_boxplot(aes(fill=Group))
 
 # Pattern: E and W wind dicrtes more on score 2
-
 ggplot(data, aes(x=Score.2, fill=Wind.Direction)) + geom_bar()
 
 #Outlier + pattern
@@ -69,11 +70,12 @@ ggplot(data, aes(x=Distance, y=Age, color=Group)) + geom_point()
 
 ggplot(data, aes(x=Distance, y=age, group=Group)) + geom_point()
 
-ggplot(data, aes(x=Distance, y=Angle)) + geom_point()
+ggplot(data, aes(y=Distance, x=Angle)) + geom_point()
 
 # This is a ptattne, E and W directions more on score2
 ggplot(data, aes(x=Score.2, fill=Wind.Direction)) + geom_bar() +  facet_wrap(~ Wind.Direction)
 
 ggplot(data, aes(x=Wind.Direction, y=Offset)) + geom_boxplot(aes(fill=Group)
                                                              
-                             ggplot(data, aes(y=Height, x=Score.2, color=Group)) + geom_boxplot()
+ggplot(data, aes(y=Height, x=Score.2, color=Group)) + geom_boxplot()
+
