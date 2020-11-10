@@ -1,0 +1,53 @@
+Data cleaning process:
+In the purpose columns, there was: 1 row with written 'ather', instead
+Other  - 2 rows with written Radio/Tv instead radio/tv (has been merged to 
+radio/tv).
+
+Alwasy in the purpose column:
+there are 3 different types of purposes: business, busness, a busines;
+Allows of them clearly refers to the same purpose: business. 
+Always in the pupose columns
+
+there was 1 Eduction purposes, that defintely belogs to the education 
+category (that has other 49 records).
+
+There are different outliers in the age colums. 
+The age range goes from -40 to 340 and this shows the clear 
+present of outliers. 
+
+There are 3 records where the age is between 80 and 340
+And 8 records where the age is between -35 and 6;
+All these outliers age has been set to 1;
+
+
+Clumn job: there were 2 'yes', that has been updated to' skilled'
+if value > 150:
+     return 1
+else:
+     return value
+
+
+--------
+Cosa devo fare:
+Applicare:
+Classification, regression,a ssociation e algorithm di clustering
+e destrifere il pattenrs, in modo dare capire quali clienti sono piu'\
+sicuri per dare il prestito. 
+
+
+These patterns should be
+represented by rules (about 6 rules from each of the algorithms used),
+supported by statistical information, such as accuracy and coverage, if
+possible.
+
+ID3 and Apriori only accept nominal values
+– Linear Regression only accepts numeric values
+
+
+------ Report Content
+1) Intro to project
+2) Tools used
+3) What is weka and operefine
+4) Steps to clean the data and export it as .arff
+5) ml Algorithms used
+6) Patterns are rules (WHAT are the rules)
